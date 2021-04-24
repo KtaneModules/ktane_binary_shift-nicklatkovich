@@ -18,6 +18,7 @@ public class NumberComponent : MonoBehaviour {
 
 	public bool active = true;
 	public int target = 0;
+	public int index;
 
 	private bool _highlighted = false;
 	public bool highlighted {
