@@ -125,6 +125,7 @@ public class BinaryShiftModule : MonoBehaviour {
 			if (invalidNumber == null) {
 				Debug.LogFormat("[Binary Shift #{0}] Solved", moduleId);
 				solved = true;
+				Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.CorrectChime, transform);
 				BombModule.HandlePass();
 				return;
 			}
@@ -145,7 +146,7 @@ public class BinaryShiftModule : MonoBehaviour {
 	public IEnumerator ProcessTwitchCommand(string command) {
 		command = command.Trim().ToLower();
 		if (command.StartsWith("press ")) command = command.Skip(6).Join("").Trim();
-		if (!Regex.IsMatch(command, @"[1-9s ]+") || (Stage.stage >= Stage.stagesCount && !readyToReset)) yield break;
+		if (!Regex.IsMatch(command, @"^[1-9s ]+$") || (Stage.stage >= Stage.stagesCount && !readyToReset)) yield break;
 		yield return null;
 		yield return command.ToCharArray().Where(c => c != ' ').Select(c => c == 's' ? Stage.Selectable : numbers[c - '1'].Selectable).ToArray();
 		if (Stage.stage >= Stage.stagesCount && !solved && !readyToReset) {
