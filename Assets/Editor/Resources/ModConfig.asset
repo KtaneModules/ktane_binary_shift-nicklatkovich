@@ -15,6 +15,6 @@ MonoBehaviour:
   title: Binary Shift
   author: NickLatkovich
   description: This module seems daunting. The key word is "seems".
-  version: 0.2.2
+  version: 0.2.3
   outputFolder: build
   previewImage: {fileID: 2800000, guid: 649411714277cb740a73b5844198a445, type: 3}

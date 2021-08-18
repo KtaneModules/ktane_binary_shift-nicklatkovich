@@ -94,6 +94,7 @@ public class BinaryShiftModule : MonoBehaviour {
 	}
 
 	private void OnNextStage() {
+		if (!activated) return;
 		if (readyToReset) {
 			Audio.PlaySoundAtTransform("BinaryShiftStagePressed", Stage.transform);
 			Reset();
@@ -144,6 +145,10 @@ public class BinaryShiftModule : MonoBehaviour {
 	}
 
 	public IEnumerator ProcessTwitchCommand(string command) {
+		if (!activated) {
+			yield return "sendtochat {0}, !{1} not activated";
+			yield break;
+		}
 		command = command.Trim().ToLower();
 		if (command.StartsWith("press ")) command = command.Skip(6).Join("").Trim();
 		if (!Regex.IsMatch(command, @"^[1-9s ]+$") || (Stage.stage >= Stage.stagesCount && !readyToReset)) yield break;
